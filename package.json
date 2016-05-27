@@ -9,7 +9,7 @@
     "test": "karma start karma.conf.js --single-run",
     "bundle-html": "gulp bundle-html",
     "bundle-js": "jspm bundle-sfx js/main.js dist/app.js",
-    "bundle": "npm run bundle-html && npm run bundle-js"
+    "build": "npm run bundle-html && npm run bundle-js"
   },
   "devDependencies": {
     "eslint": "^2.10.2",
