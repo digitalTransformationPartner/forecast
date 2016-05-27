@@ -3,7 +3,7 @@ const FORECAST_5_DAYS = 'forecast';
 
 export default function ({fetch = window.fetch, token}) {
 
-	function forecast5day (city, country) {
+	function forecast5days (city, country) {
 		return fetch(`${BASE_API}/${FORECAST_5_DAYS}?q=${city},${country}&appid=${token}`)
 		.then(response => {
 			if (response.ok) {
@@ -14,5 +14,5 @@ export default function ({fetch = window.fetch, token}) {
 		});
 	}
 
-	return { forecast5day };
+	return { forecast5days };
 }

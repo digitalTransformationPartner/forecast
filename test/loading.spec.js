@@ -4,8 +4,8 @@ describe('Load the weather widget', function () {
 	});
 
 	function loadWidget (mockFetch, done, assert) {
-		System.import('../base/src/js/main.js').then(function (main) {
-			return main.default.load({ fetch: mockFetch })
+		System.import('../base/src/js/widget.js').then(function (module) {
+			return module.load({ fetch: mockFetch })
 				.then(function (widgets) {
 					return Promise.resolve(assert(widgets))
 						.then(function () { disposeWidgets(widgets); });
@@ -50,5 +50,22 @@ describe('Load the weather widget', function () {
 		});
 	});
 
-	it('shows the widget if the server response is correct', function () {});
+	it('shows the widget if the server response is correct', function (done) {
+		var mockFetch = function (path) {
+			expect(path).toMatch(/\?q=london,uk/);
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				json: function () {
+					return System.import('../base/test/mocks/forecast').then(function (json) {
+						return json.default;
+					});
+				}
+			});
+		};
+		loadWidget(mockFetch, done, function (widgets) {
+			expect(widgets.length).toBe(1);
+			expect(widgets[0].node.querySelectorAll('.weather_dateContainer').length).toBe(5);
+		});
+	});
 });
