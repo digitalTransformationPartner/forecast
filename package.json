@@ -6,10 +6,17 @@
   "scripts": {
     "start": "http-server -p 4001",
     "pretest": "eslint src test",
-    "test": "karma start karma.conf.js --single-run"
+    "test": "karma start karma.conf.js --single-run",
+    "bundle-html": "gulp bundle-html",
+    "bundle-js": "jspm bundle-sfx js/main.js dist/app.js",
+    "bundle": "npm run bundle-html && npm run bundle-js"
   },
   "devDependencies": {
     "eslint": "^2.10.2",
+    "gulp": "^3.9.1",
+    "gulp-if": "^2.0.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-useref": "^3.1.0",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "jspm": "^0.16.35",
